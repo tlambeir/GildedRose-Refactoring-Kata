@@ -10,5 +10,6 @@ final class EpicStrategy extends UpdateStrategy
 {
     public function updateQuality(DegradableItem $degradableItem): void
     {
+
     }
 }

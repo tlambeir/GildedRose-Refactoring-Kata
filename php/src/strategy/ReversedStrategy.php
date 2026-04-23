@@ -10,5 +10,7 @@ final class ReversedStrategy extends UpdateStrategy
 {
     public function updateQuality(DegradableItem $degradableItem): void
     {
+        $amount = $this->getDefaultAmount($degradableItem);
+        $this->updateQualityAndSellin($degradableItem,-$amount);
     }
 }

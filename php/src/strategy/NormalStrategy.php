@@ -10,5 +10,7 @@ final class NormalStrategy extends UpdateStrategy
 {
     public function updateQuality(DegradableItem $degradableItem): void
     {
+        $amount = $this->getDefaultAmount($degradableItem);
+        $this->updateQualityAndSellin($degradableItem,$amount);
     }
 }
