@@ -6,7 +6,6 @@ namespace Tests;
 
 use GildedRose\Item;
 use GildedRose\GildedRose;
-use GildedRose\ItemType;
 use PHPUnit\Framework\TestCase;
 use ApprovalTests\Approvals;
 
@@ -57,7 +56,7 @@ class ApprovalTest extends TestCase
     public function testEpic(): void
     {
         // Epic items should never be sold or drop quality
-        $items = [new Item('Sulfuras, Hand of Ragnaros', 1, 80,ItemType::Epic)];
+        $items = [new Item('Sulfuras, Hand of Ragnaros', 1, 80)];
         $app = new GildedRose($items);
         $app->processItems();
 
@@ -67,11 +66,11 @@ class ApprovalTest extends TestCase
     {
         $items = [
             // Increase quality by 1 if sellIn drops by 1
-            new Item('Aged Brie', 10, 49,ItemType::Reverse),
+            new Item('Aged Brie', 10, 49),
             // Don't go over max quality
-            new Item('Aged Brie', 10, 50,ItemType::Reverse),
+            new Item('Aged Brie', 10, 50),
             // Increase quality by 1 if sellIn is lower than 0
-            new Item('Aged Brie', -1, 48,ItemType::Reverse),
+            new Item('Aged Brie', -1, 48),
         ];
         $app = new GildedRose($items);
         $app->processItems();
@@ -82,15 +81,15 @@ class ApprovalTest extends TestCase
     {
         $items = [
             // Increase quality by 1 if sellIn drops by 1
-            new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20,ItemType::Ticket),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20),
             // Increase quality by 2 if sellIn is 10 or lower
-            new Item('Backstage passes to a TAFKAL80ETC concert', 10, 48,ItemType::Ticket),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 10, 48),
             // Increase quality by 3 if sellIn is 5 or lower
-            new Item('Backstage passes to a TAFKAL80ETC concert', 5, 47,ItemType::Ticket),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 5, 47),
             // Set quality to 0 after the concert
-            new Item('Backstage passes to a TAFKAL80ETC concert', 0, 50,ItemType::Ticket),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 0, 50),
             // Don't go over max quality
-            new Item('Backstage passes to a TAFKAL80ETC concert', 10, 50,ItemType::Ticket),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 10, 50),
         ];
         $app = new GildedRose($items);
         $app->processItems();

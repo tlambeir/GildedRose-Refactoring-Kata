@@ -25,8 +25,8 @@ final class GildedRose
     public function processItems(): void
     {
         foreach ($this->items as $item) {
-            $updateStrategyFactory = UpdateStrategyFactory::create($item);
-            $updateStrategyFactory->updateQuality($item);
+            $updateStrategy= UpdateStrategyFactory::create($item);
+            $updateStrategy->updateQuality($item);
         }
     }
 }
