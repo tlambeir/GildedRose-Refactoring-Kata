@@ -11,7 +11,11 @@ use GildedRose\strategy\EpicStrategy;
 use GildedRose\strategy\ReversedStrategy;
 use GildedRose\strategy\UpdateStrategy;
 
-enum ItemType {
+/**
+ * Catalogue item kinds for {@see DegradableItem}; each case maps to an {@see UpdateStrategy}.
+ */
+enum ItemType
+{
     case Epic;
     case Conjured;
     case Ticket;
@@ -19,10 +23,19 @@ enum ItemType {
     case Normal;
 }
 
+/**
+ * {@see Item} with a stable category and the {@see UpdateStrategy} used for daily updates.
+ */
 class DegradableItem extends Item
 {
     public UpdateStrategy $updateStrategy;
 
+    /**
+     * @param string $name Item display name
+     * @param int $sellIn Days until sell-by (negative if past sell-by)
+     * @param int $quality Current quality (clamped elsewhere when applied)
+     * @param ItemType $itemType Category; selects {@see $updateStrategy} via a match expression
+     */
     public function __construct(
         public string $name,
         public int $sellIn,
@@ -30,23 +43,29 @@ class DegradableItem extends Item
         public ItemType $itemType = ItemType::Normal,
     ) {
         // Assign the strategy based on the type provided
-        $this->updateStrategy = match($this->itemType) {
-            ItemType::Normal   => new NormalStrategy(),
-            ItemType::Reverse  => new ReversedStrategy(),
-            ItemType::Ticket   => new TicketStrategy(),
-            ItemType::Epic     => new EpicStrategy(),
+        $this->updateStrategy = match ($this->itemType) {
+            ItemType::Normal => new NormalStrategy(),
+            ItemType::Reverse => new ReversedStrategy(),
+            ItemType::Ticket => new TicketStrategy(),
+            ItemType::Epic => new EpicStrategy(),
             ItemType::Conjured => new ConjuredStrategy(),
         };
         parent::__construct($name, $sellIn, $quality);
     }
 
+    /**
+     * @return string "name, typeName, sellIn, quality" (type name matches {@see ItemType} case name)
+     */
     public function __toString(): string
     {
         return (string) "{$this->name}, {$this->itemType->name}, {$this->sellIn}, {$this->quality}";
     }
 
-    public function updateQuality(): void{
+    /**
+     * Apply one day of rules using {@see $updateStrategy}.
+     */
+    public function updateQuality(): void
+    {
         $this->updateStrategy->updateQuality($this);
     }
-
 }

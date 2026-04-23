@@ -8,6 +8,9 @@ use GildedRose\DegradableItem;
 
 final class TicketStrategy extends UpdateStrategy
 {
+    /**
+     * @param DegradableItem $degradableItem Backstage pass; quality rules depend on days until the show
+     */
     public function updateQuality(DegradableItem $degradableItem): void
     {
         if($degradableItem->sellIn > 0){
