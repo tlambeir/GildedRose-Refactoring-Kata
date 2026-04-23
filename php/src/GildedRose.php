@@ -19,8 +19,7 @@ final class GildedRose
         private array $items,
         private int $minQuality = 0,
         private int $maxQuality = 50,
-        private int $conjuredFactor = 2,
-        private array $ticketDeltas = [1,2,3]
+        private int $conjuredFactor = 2
     ) {
     }
 
