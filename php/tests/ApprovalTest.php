@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Tests;
 
-error_reporting(E_ALL ^ E_DEPRECATED);
-
 use GildedRose\GildedRose;
 use GildedRose\Item;
 use GildedRose\DegradableItem;
