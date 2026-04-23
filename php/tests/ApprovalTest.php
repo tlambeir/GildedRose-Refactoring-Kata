@@ -42,11 +42,11 @@ class ApprovalTest extends TestCase
     {
         $items = [
             // Don't drop below 0 quality
-            new Item('Conjured Mana Cake', 0, 1, ItemType::Conjured),
+            new Item('Conjured Mana Cake', 0, 1),
             // Reduce Quality by 2 if quality is higher than 0
-            new Item('Conjured Mana Cake', 1, 10, ItemType::Conjured),
+            new Item('Conjured Mana Cake', 1, 10),
             // Reduce Quality by 4 if sellIn is lower than 0
-            new Item('Conjured Mana Cake', -1, 10, ItemType::Conjured),
+            new Item('Conjured Mana Cake', -1, 10),
         ];
         $app = new GildedRose($items);
         $app->processItems();
