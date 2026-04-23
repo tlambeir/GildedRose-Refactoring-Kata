@@ -6,6 +6,9 @@ namespace GildedRose\strategy;
 
 use GildedRose\Item;
 
+/**
+ * Standard items: quality moves by {@see getDefaultAmount()} (normal degradation).
+ */
 final class NormalStrategy extends UpdateStrategy
 {
     /**
@@ -14,6 +17,6 @@ final class NormalStrategy extends UpdateStrategy
     public function updateQuality(Item $item): void
     {
         $amount = $this->getDefaultAmount($item);
-        $this->updateQualityAndSellin($item,$amount);
+        $this->updateQualityAndSellin($item, $amount);
     }
 }

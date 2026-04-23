@@ -6,6 +6,9 @@ namespace GildedRose\strategy;
 
 use GildedRose\Item;
 
+/**
+ * Conjured items: the default decay step is multiplied by {@see $conjuredFactor}.
+ */
 final class ConjuredStrategy extends UpdateStrategy
 {
     private int $conjuredFactor = 2;
@@ -16,6 +19,6 @@ final class ConjuredStrategy extends UpdateStrategy
     public function updateQuality(Item $item): void
     {
         $amount = $this->getDefaultAmount($item);
-        $this->updateQualityAndSellin($item,$amount * $this->conjuredFactor);
+        $this->updateQualityAndSellin($item, $amount * $this->conjuredFactor);
     }
 }

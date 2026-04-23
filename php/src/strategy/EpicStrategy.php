@@ -6,6 +6,9 @@ namespace GildedRose\strategy;
 
 use GildedRose\Item;
 
+/**
+ * Legendary items: no change to quality or sell-in.
+ */
 final class EpicStrategy extends UpdateStrategy
 {
     /**
@@ -13,6 +16,5 @@ final class EpicStrategy extends UpdateStrategy
      */
     public function updateQuality(Item $item): void
     {
-
     }
 }

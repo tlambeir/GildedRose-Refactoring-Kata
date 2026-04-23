@@ -12,12 +12,17 @@ use GildedRose\strategy\TicketStrategy;
 use GildedRose\strategy\UpdateStrategy;
 
 /**
- * Wraps raw catalogue items as {@see Item} instances for {@see GildedRose::processItems()}.
+ * Selects a concrete {@see UpdateStrategy} from an {@see Item}'s {@see Item::$name} (kata catalogue names).
  */
-class UpdateStrategyFactory
+final class UpdateStrategyFactory
 {
-
-    public static function create(Item $item): UpdateStrategy {
+    /**
+     * @param Item $item Inventory row; only {@see Item::$name} is used for routing
+     *
+     * @return UpdateStrategy Stateless strategy instance for this item kind
+     */
+    public static function create(Item $item): UpdateStrategy
+    {
         return match ($item->name) {
             'Aged Brie' => new ReversedStrategy(),
             'Backstage passes to a TAFKAL80ETC concert' => new TicketStrategy(),
@@ -26,5 +31,4 @@ class UpdateStrategyFactory
             default => new NormalStrategy(),
         };
     }
-
 }

@@ -6,6 +6,9 @@ namespace GildedRose\strategy;
 
 use GildedRose\Item;
 
+/**
+ * Aged Brie-style items: apply the inverse of the default decay (quality increases for this step).
+ */
 final class ReversedStrategy extends UpdateStrategy
 {
     /**
@@ -14,6 +17,6 @@ final class ReversedStrategy extends UpdateStrategy
     public function updateQuality(Item $item): void
     {
         $amount = $this->getDefaultAmount($item);
-        $this->updateQualityAndSellin($item,-$amount);
+        $this->updateQualityAndSellin($item, -$amount);
     }
 }

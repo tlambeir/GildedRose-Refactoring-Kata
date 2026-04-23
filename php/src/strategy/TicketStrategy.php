@@ -6,6 +6,9 @@ namespace GildedRose\strategy;
 
 use GildedRose\Item;
 
+/**
+ * Backstage passes: quality rises as the show approaches, then drops to zero after sell-in passes.
+ */
 final class TicketStrategy extends UpdateStrategy
 {
     /**
@@ -13,11 +16,11 @@ final class TicketStrategy extends UpdateStrategy
      */
     public function updateQuality(Item $item): void
     {
-        if($item->sellIn > 0){
+        if ($item->sellIn > 0) {
             $amount = $item->sellIn <= 5 ? 3 : ($item->sellIn <= 10 ? 2 : 1);
-            $this->updateQualityAndSellin($item,$amount);
+            $this->updateQualityAndSellin($item, $amount);
         } else {
-            $this->updateQualityAndSellin($item,-$item->quality);
+            $this->updateQualityAndSellin($item, -$item->quality);
         }
     }
 }
