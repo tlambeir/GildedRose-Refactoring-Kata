@@ -13,7 +13,6 @@ final class GildedRose
      * @param Int $minQuality
      * @param Int $maxQuality
      * @param Int $conjuredFactor
-     * @param Int[] $ticketDeltas
      */
     public function __construct(
         private array $items,
