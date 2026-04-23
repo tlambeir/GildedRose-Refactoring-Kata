@@ -7,60 +7,65 @@ namespace GildedRose;
 final class GildedRose
 {
     /**
+     * Default values
+     *
      * @param Item[] $items
+     * @param Int $minQuality
+     * @param Int $maxQuality
+     * @param Int $conjuredFactor
+     * @param Int[] $ticketDeltas
      */
     public function __construct(
-        private array $items
+        private array $items,
+        private int $minQuality = 0,
+        private int $maxQuality = 50,
+        private int $conjuredFactor = 2,
+        private array $ticketDeltas = [1,2,3]
     ) {
     }
 
-    public function updateQuality(): void
+    /**
+     * Increases or decreases quality based on operator and amount
+     * Decreases sellIn by 1 step
+     *
+     * @param DegradableItem $item
+     * @param String $operator
+     * @param Int $amount
+     */
+    public function updateQuality($item, $amount): void{
+        $item->quality = min($this->maxQuality,max($this->minQuality, $item->quality + $amount));
+        $item->sellIn--;
+    }
+
+    /**
+     * Uses a factory to keep Item/items intact to satisfy the goblin
+     * Use switch method to modify qualtiy/sellIn based on item type
+     */
+    public function processItems(): void
     {
         foreach ($this->items as $item) {
-            if ($item->name != 'Aged Brie' and $item->name != 'Backstage passes to a TAFKAL80ETC concert') {
-                if ($item->quality > 0) {
-                    if ($item->name != 'Sulfuras, Hand of Ragnaros') {
-                        $item->quality = $item->quality - 1;
-                    }
-                }
-            } else {
-                if ($item->quality < 50) {
-                    $item->quality = $item->quality + 1;
-                    if ($item->name == 'Backstage passes to a TAFKAL80ETC concert') {
-                        if ($item->sellIn < 11) {
-                            if ($item->quality < 50) {
-                                $item->quality = $item->quality + 1;
-                            }
+            $degradableItem = DegradableItemFactory::create($item);
+            $amount = $degradableItem->sellIn <= 0 ? -2 : -1;
+            switch ($degradableItem->itemType) {
+                case ItemType::Epic:
+                    break;
+                case ItemType::Reverse:
+                        $this->updateQuality($degradableItem,-$amount);
+                    break;
+                case ItemType::Ticket:
+                        if($degradableItem->sellIn > 0){
+                            $amount = $degradableItem->sellIn <= 5 ? 3 : ($degradableItem->sellIn <= 10 ? 2 : 1);
+                            $this->updateQuality($degradableItem,$amount);
+                        } else {
+                            $this->updateQuality($degradableItem,-$degradableItem->quality);
                         }
-                        if ($item->sellIn < 6) {
-                            if ($item->quality < 50) {
-                                $item->quality = $item->quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if ($item->name != 'Sulfuras, Hand of Ragnaros') {
-                $item->sellIn = $item->sellIn - 1;
-            }
-
-            if ($item->sellIn < 0) {
-                if ($item->name != 'Aged Brie') {
-                    if ($item->name != 'Backstage passes to a TAFKAL80ETC concert') {
-                        if ($item->quality > 0) {
-                            if ($item->name != 'Sulfuras, Hand of Ragnaros') {
-                                $item->quality = $item->quality - 1;
-                            }
-                        }
-                    } else {
-                        $item->quality = $item->quality - $item->quality;
-                    }
-                } else {
-                    if ($item->quality < 50) {
-                        $item->quality = $item->quality + 1;
-                    }
-                }
+                    break;
+                case ItemType::Conjured:
+                        $this->updateQuality($degradableItem,$amount * $this->conjuredFactor);
+                    break;
+                default:
+                        $this->updateQuality($degradableItem,$amount);
+                    break;
             }
         }
     }

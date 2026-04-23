@@ -1,0 +1,3 @@
+[0] -> Conjured Mana Cakes 1, Conjured, -1, 0
+[1] -> Conjured Mana Cakes 2, Conjured, 0, 8
+[2] -> Conjured Mana Cakes 3, Conjured, -2, 6

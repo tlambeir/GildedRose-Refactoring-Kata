@@ -1,0 +1,3 @@
+[0] -> normal item 1, Normal, -1, 0
+[1] -> normal item 2, Normal, 0, 0
+[2] -> normal item 3, Normal, -2, 0

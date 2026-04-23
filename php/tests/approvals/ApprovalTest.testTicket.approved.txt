@@ -1,0 +1,5 @@
+[0] -> Backstage passes 1, Ticket, 14, 21
+[1] -> Backstage passes 2, Ticket, 9, 50
+[2] -> Backstage passes 3, Ticket, 4, 50
+[3] -> Backstage passes 4, Ticket, -1, 0
+[4] -> Backstage passes 5, Ticket, 9, 50
