@@ -27,10 +27,9 @@ final class GildedRose
      * Decreases sellIn by 1 step
      *
      * @param DegradableItem $item
-     * @param String $operator
      * @param Int $amount
      */
-    public function updateQuality($item, $amount): void{
+    public function updateQuality(DegradableItem $item, int $amount): void{
         $item->quality = min($this->maxQuality,max($this->minQuality, $item->quality + $amount));
         $item->sellIn--;
     }
