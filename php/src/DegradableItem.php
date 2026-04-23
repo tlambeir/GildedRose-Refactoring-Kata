@@ -27,4 +27,9 @@ class DegradableItem extends Item
     {
         return (string) "{$this->name}, {$this->itemType->name}, {$this->sellIn}, {$this->quality}";
     }
+
+    public function updateQuality(DegradableItem $item): void{
+
+    }
+
 }

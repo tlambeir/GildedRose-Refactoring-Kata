@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use GildedRose\GildedRose;
-use GildedRose\Item;
 use GildedRose\DegradableItem;
+use GildedRose\GildedRose;
 use GildedRose\ItemType;
 use PHPUnit\Framework\TestCase;
 use ApprovalTests\Approvals;
