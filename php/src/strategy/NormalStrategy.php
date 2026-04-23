@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace GildedRose\strategy;
 
-use GildedRose\DegradableItem;
+use GildedRose\Item;
 
 final class NormalStrategy extends UpdateStrategy
 {
     /**
-     * @param DegradableItem $degradableItem Standard item; quality decreases by the default amount
+     * @param Item $item Standard item; quality decreases by the default amount
      */
-    public function updateQuality(DegradableItem $degradableItem): void
+    public function updateQuality(Item $item): void
     {
-        $amount = $this->getDefaultAmount($degradableItem);
-        $this->updateQualityAndSellin($degradableItem,$amount);
+        $amount = $this->getDefaultAmount($item);
+        $this->updateQualityAndSellin($item,$amount);
     }
 }

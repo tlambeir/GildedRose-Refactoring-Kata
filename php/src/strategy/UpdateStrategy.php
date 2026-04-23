@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GildedRose\strategy;
 
-use GildedRose\DegradableItem;
+use GildedRose\Item;
 
 abstract class UpdateStrategy
 {
@@ -14,17 +14,17 @@ abstract class UpdateStrategy
     /**
      * Apply this strategy’s quality and sell-in rules for one day.
      *
-     * @param DegradableItem $degradableItem Item being updated in place
+     * @param Item $item Item being updated in place
      */
-    abstract public function updateQuality(DegradableItem $degradableItem): void;
+    abstract public function updateQuality(Item $item): void;
 
     /**
      * Clamp quality within bounds, add the quality delta, then decrease sell-in by one.
      *
-     * @param DegradableItem $item Item to mutate
+     * @param Item $item Item to mutate
      * @param int $amount Delta applied to quality before clamping
      */
-    public function updateQualityAndSellin(DegradableItem $item, int $amount): void
+    public function updateQualityAndSellin(Item $item, int $amount): void
     {
         $item->quality = min($this->maxQuality, max($this->minQuality, $item->quality + $amount));
         $item->sellIn--;
@@ -33,11 +33,11 @@ abstract class UpdateStrategy
     /**
      * Default per-day quality delta before strategy-specific rules (more negative after sell-by).
      *
-     * @param DegradableItem $item Item whose sell-in is inspected
+     * @param Item $item Item whose sell-in is inspected
      *
      * @return int Quality change step (typically -1 or -2)
      */
-    public function getDefaultAmount(DegradableItem $item): int
+    public function getDefaultAmount(Item $item): int
     {
         return $item->sellIn <= 0 ? -2 : -1;
     }

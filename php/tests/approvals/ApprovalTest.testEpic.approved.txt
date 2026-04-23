@@ -1,1 +1,1 @@
-[0] -> Sulfuras, Epic, 1, 80
+[0] -> Sulfuras, Hand of Ragnaros, 1, 80

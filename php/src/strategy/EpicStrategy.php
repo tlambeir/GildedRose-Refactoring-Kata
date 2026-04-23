@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GildedRose\strategy;
 
-use GildedRose\DegradableItem;
+use GildedRose\Item;
 
 final class EpicStrategy extends UpdateStrategy
 {
     /**
-     * @param DegradableItem $degradableItem Legendary item; no change to quality or sell-in
+     * @param Item $item Legendary item; no change to quality or sell-in
      */
-    public function updateQuality(DegradableItem $degradableItem): void
+    public function updateQuality(Item $item): void
     {
 
     }

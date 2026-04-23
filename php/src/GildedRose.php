@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GildedRose;
 
+use GildedRose\strategy\UpdateStrategy;
+
 final class GildedRose
 {
     /**
@@ -23,8 +25,8 @@ final class GildedRose
     public function processItems(): void
     {
         foreach ($this->items as $item) {
-            $degradableItem = DegradableItemFactory::create($item);
-            $degradableItem->updateQuality();
+            $updateStrategyFactory = UpdateStrategyFactory::create($item);
+            $updateStrategyFactory->updateQuality($item);
         }
     }
 }

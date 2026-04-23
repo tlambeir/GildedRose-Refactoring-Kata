@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace GildedRose\strategy;
 
-use GildedRose\DegradableItem;
+use GildedRose\Item;
 
 final class TicketStrategy extends UpdateStrategy
 {
     /**
-     * @param DegradableItem $degradableItem Backstage pass; quality rules depend on days until the show
+     * @param Item $item Backstage pass; quality rules depend on days until the show
      */
-    public function updateQuality(DegradableItem $degradableItem): void
+    public function updateQuality(Item $item): void
     {
-        if($degradableItem->sellIn > 0){
-            $amount = $degradableItem->sellIn <= 5 ? 3 : ($degradableItem->sellIn <= 10 ? 2 : 1);
-            $this->updateQualityAndSellin($degradableItem,$amount);
+        if($item->sellIn > 0){
+            $amount = $item->sellIn <= 5 ? 3 : ($item->sellIn <= 10 ? 2 : 1);
+            $this->updateQualityAndSellin($item,$amount);
         } else {
-            $this->updateQualityAndSellin($degradableItem,-$degradableItem->quality);
+            $this->updateQualityAndSellin($item,-$item->quality);
         }
     }
 }
