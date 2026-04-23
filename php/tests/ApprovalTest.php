@@ -67,7 +67,7 @@ class ApprovalTest extends TestCase
     public function testReverse(): void
     {
         $items = [
-            // Increase quality by 1 if sell in drops by 1
+            // Increase quality by 1 if sellIn drops by 1
             new DegradableItem('Brie 1', 10, 49,ItemType::Reverse),
             // Don't go over max quality
             new DegradableItem('Brie 2', 10, 50,ItemType::Reverse),
@@ -82,11 +82,11 @@ class ApprovalTest extends TestCase
     public function testTicket(): void
     {
         $items = [
-            // Increase quality by 1 if sell in drops by 1
+            // Increase quality by 1 if sellIn drops by 1
             new DegradableItem('Backstage passes 1', 15, 20,ItemType::Ticket),
-            // Increase quality by 2 if sell is 10 or lower
+            // Increase quality by 2 if sellIn is 10 or lower
             new DegradableItem('Backstage passes 2', 10, 48,ItemType::Ticket),
-            // Increase quality by 3 if sell is 5 or lower
+            // Increase quality by 3 if sellIn is 5 or lower
             new DegradableItem('Backstage passes 3', 5, 47,ItemType::Ticket),
             // Set quality to 0 after the concert
             new DegradableItem('Backstage passes 4', 0, 50,ItemType::Ticket),
