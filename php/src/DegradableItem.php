@@ -37,9 +37,9 @@ class DegradableItem extends Item
      * @param ItemType $itemType Category; selects {@see $updateStrategy} via a match expression
      */
     public function __construct(
-        public string $name,
-        public int $sellIn,
-        public int $quality,
+        string $name,
+        int $sellIn,
+        int $quality,
         public ItemType $itemType = ItemType::Normal,
     ) {
         // Assign the strategy based on the type provided
